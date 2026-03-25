@@ -89,17 +89,27 @@ Note any open action items, past decisions, or relationship context.
 
 ### Step 5: Research Attendees & Companies (Apify)
 
-Run the Apify research script to find recent news about attendees and their companies:
+Run the Apify research script to deeply research attendees and their companies using multiple scrapers:
 
 ```bash
 python3 scripts/apify_research.py --names "{comma_separated_attendee_names}" --companies "{comma_separated_company_names}"
 ```
 
-The script returns JSON with:
-- `search_results`: array of {title, snippet, url} from Google search
-- `errors`: any issues encountered (skip gracefully if Apify fails)
+The script runs 6 Apify scrapers in sequence and returns JSON with:
+- `search_results`: Google search results for recent news ({title, snippet, url})
+- `linkedin_profiles`: attendee LinkedIn profiles ({name, headline, location, bio})
+- `linkedin_companies`: company LinkedIn pages ({name, description, industry, employeeCount})
+- `tweets`: recent tweets mentioning attendees ({text, author, date})
+- `website_content`: company website About/Team page content ({title, url, text})
+- `crunchbase`: company funding and investor info ({name, funding_total, last_funding_type, investors})
+- `errors`: any issues encountered (skip gracefully if individual scrapers fail)
 
-Highlight anything noteworthy: funding rounds, product launches, leadership changes, recent press.
+Synthesize findings across all sources. Highlight:
+- **From LinkedIn**: attendee's current role, experience, company size and industry
+- **From Twitter/X**: recent public statements, interests, or announcements
+- **From Crunchbase**: funding stage, recent rounds, key investors
+- **From Google**: recent press, product launches, leadership changes
+- **From Website**: team structure, company mission, recent blog posts
 
 ### Step 6: Search Relevant Documents (Contextual AI)
 

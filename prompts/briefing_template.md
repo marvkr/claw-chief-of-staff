@@ -36,12 +36,23 @@ Use this structure for all meeting prep briefings:
 
 ### 🌐 External Research
 
-{Highlights from Apify Google search results. Focus on newsworthy items.}
+**LinkedIn**
+- {person}: {headline} — {bio_summary} ([profile]({linkedin_url}))
+- {company}: {industry}, ~{employeeCount} employees — {description_summary}
 
-- {company} {news_headline} — [source]({url})
-- {person} {news_headline} — [source]({url})
+**Twitter/X**
+- Recent: "{tweet_text}" — @{author}, {date}
 
-{If Apify failed: "External research unavailable."}
+**Crunchbase**
+- {company}: {funding_total} raised ({last_funding_type}). Investors: {investor_list}
+
+**Google News**
+- {news_headline} — [source]({url})
+
+**Company Website**
+- From {company} About page: {key_excerpt}
+
+{If a scraper returned no data, omit that subsection. If all scrapers failed: "External research unavailable."}
 
 ---
 

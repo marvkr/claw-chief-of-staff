@@ -19,10 +19,20 @@ An OpenClaw skill that acts as your AI Chief of Staff — prepping you for meeti
 ```
 User → OpenClaw Gateway
          ├── Civic MCP Hub → Google Calendar, Gmail (read-only)
-         ├── Redis Memory → memory_store / memory_recall / memory_forget
+         ├── Redis Cloud + Agent Memory Server → memory_store / memory_recall / memory_forget
          ├── Apify → Google search for attendee/company news
          └── Contextual AI → RAG search over uploaded documents
 ```
+
+### How Redis Cloud Memory Works
+
+Redis Cloud serves as the persistent brain for your Chief of Staff. The `redis-agent-memory-server` connects to your Redis Cloud instance and provides semantic memory operations powered by OpenAI embeddings:
+
+- **memory_store** — after a meeting debrief, stores decisions, action items, contact preferences, and relationship context as vector-indexed entries
+- **memory_recall** — before a meeting, semantically searches past interactions with the same people (e.g., "what do I know about Alex Chen?" finds all related memories, not just exact name matches)
+- **memory_forget** — removes outdated or incorrect memories on request
+
+This means your meeting history, negotiation details, and contact preferences persist across sessions in Redis Cloud — so the agent is always prepared, even weeks later.
 
 ## Setup
 
@@ -37,9 +47,11 @@ clawhub install YOUR_USERNAME/claw-chief-of-staff
 ```
 
 ### 2. Start Redis Memory Server
+The memory server connects to Redis Cloud for persistent, cross-session storage.
 ```bash
 cp .env.example .env
-# Fill in your API keys in .env
+# Fill in your API keys in .env, including REDIS_URL from your Redis Cloud instance
+# (https://cloud.redis.io → Database → Connect → Redis CLI for the connection string)
 docker compose up -d
 ```
 
@@ -86,10 +98,10 @@ Copy `openclaw.json` to your OpenClaw config directory, or merge the plugin/skil
 
 | Sponsor | Role | How It's Used |
 |---------|------|---------------|
-| **Redis** | Persistent agent memory | Stores/recalls meeting history, decisions, action items, preferences across sessions |
+| **Redis Cloud** | Persistent agent memory | Vector-indexed storage via `redis-agent-memory-server` — stores/recalls meeting history, decisions, action items, and preferences across sessions using semantic search |
 | **Civic** | Secure cloud tool access | MCP gateway to Google Calendar + Gmail with read-only guardrails and audit trail |
 | **Contextual AI** | Document search (RAG) | Multi-hop retrieval over uploaded contracts, proposals, and specs |
-| **Apify** | Web research | Google search for recent news about meeting attendees and their companies |
+| **Apify** | Deep attendee research | 6 scrapers — Google Search (news), LinkedIn Profile (bio/role), LinkedIn Company (size/industry), Twitter/X (recent activity), Website Crawler (About/Team pages), Crunchbase (funding/investors) |
 
 ## License
 
