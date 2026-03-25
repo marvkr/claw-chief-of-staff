@@ -1,0 +1,29 @@
+{
+  "plugins": {
+    "entries": {
+      "redis-memory": {
+        "enabled": true,
+        "config": {
+          "serverUrl": "http://localhost:8000",
+          "namespace": "chief-of-staff",
+          "userId": "default-user",
+          "autoCapture": true,
+          "autoRecall": true,
+          "recallLimit": 5,
+          "minScore": 0.3
+        }
+      }
+    }
+  },
+  "skills": {
+    "entries": {
+      "civic-mcp-bridge": {
+        "enabled": true,
+        "env": {
+          "CIVIC_URL": "${CIVIC_URL}",
+          "CIVIC_TOKEN": "${CIVIC_TOKEN}"
+        }
+      }
+    }
+  }
+}
