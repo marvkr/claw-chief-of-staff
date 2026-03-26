@@ -102,27 +102,46 @@ Also search for any stored preferences or action items:
 
 Note any open action items, past decisions, or relationship context.
 
-### Step 5: Research Attendees & Companies (Apify)
+### Step 5: Research Attendees & Companies (Apify via Civic)
 
-**IMPORTANT**: You MUST run the Apify research script below. Do NOT attempt to browse LinkedIn, Twitter, Crunchbase, or any website directly. Do NOT try to visit URLs in a browser. The script uses the Apify API to scrape all sources and returns structured JSON. Always use the script.
+**IMPORTANT**: You MUST research every attendee using the Apify tools available through Civic. Do NOT skip this step. Do NOT give generic advice without researching first. Run ALL of the searches below for each attendee.
 
-```bash
-python3 scripts/apify_research.py --names "{comma_separated_attendee_names}" --companies "{comma_separated_company_names}"
+Use the `apify-apify-slash-rag-web-browser` tool (via Civic) to run these searches for each attendee. Run them in parallel when possible:
+
+**Search 1 — LinkedIn Profile**:
+```
+apify-apify-slash-rag-web-browser(query: "site:linkedin.com/in {attendee_name} {company_name}", maxResults: 3, outputFormats: "text")
 ```
 
-If the user provided LinkedIn profile URLs, pass them too:
-```bash
-python3 scripts/apify_research.py --names "{names}" --companies "{companies}" --urls "{comma_separated_linkedin_urls}"
+**Search 2 — LinkedIn Company**:
+```
+apify-apify-slash-rag-web-browser(query: "site:linkedin.com/company {company_name}", maxResults: 3, outputFormats: "text")
 ```
 
-The script searches 6 sources via Apify and returns JSON with:
-- `search_results`: Google search results for recent news ({title, snippet, url})
-- `linkedin_profiles`: attendee LinkedIn profiles found via search ({name, headline, url})
-- `linkedin_companies`: company LinkedIn pages found via search ({name, description, url})
-- `tweets`: recent tweets/X posts found via search ({text, url})
-- `website_content`: company website About/Team page content ({title, url, text})
-- `crunchbase`: company funding info found via search ({name, description, url})
-- `errors`: any issues encountered (skip gracefully if individual scrapers fail)
+**Search 3 — Recent News**:
+```
+apify-apify-slash-rag-web-browser(query: "{attendee_name} {company_name} recent news 2026", maxResults: 5, outputFormats: "text")
+```
+
+**Search 4 — Twitter/X**:
+```
+apify-apify-slash-rag-web-browser(query: "site:twitter.com OR site:x.com {attendee_name}", maxResults: 3, outputFormats: "text")
+```
+
+**Search 5 — Crunchbase**:
+```
+apify-apify-slash-rag-web-browser(query: "site:crunchbase.com {company_name}", maxResults: 3, outputFormats: "text")
+```
+
+**Search 6 — Company Website**:
+```
+apify-apify-slash-rag-web-browser(query: "{company_name} about team", maxResults: 3, outputFormats: "text")
+```
+
+If the user provided a LinkedIn URL directly, also scrape it:
+```
+apify-apify-slash-rag-web-browser(query: "{linkedin_url}", maxResults: 1, outputFormats: "text")
+```
 
 Synthesize findings across all sources. Highlight:
 - **From LinkedIn**: attendee's current role, experience, company size and industry
