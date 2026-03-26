@@ -117,10 +117,12 @@ Note any open action items, past decisions, or relationship context.
 
 Use the `apify-apify-slash-rag-web-browser` tool (via Civic) to run these searches for each attendee. Run them in parallel when possible:
 
-**Search 1 — LinkedIn Profile**:
+**Search 1 — LinkedIn Profile** (use FULL NAME, not company name):
 ```
-apify-apify-slash-rag-web-browser(query: "site:linkedin.com/in {attendee_name} {company_name}", maxResults: 3, outputFormats: "text")
+apify-apify-slash-rag-web-browser(query: "site:linkedin.com/in {first_name} {last_name} {company_name}", maxResults: 3, outputFormats: "text")
 ```
+Example: For "Nicolo Magnante" at "Swish", search: `site:linkedin.com/in Nicolo Magnante Swish`
+NOT: `site:linkedin.com/in Nicolo Swish` (wrong — "Swish" is the company, not the last name)
 
 **Search 2 — LinkedIn Company**:
 ```
