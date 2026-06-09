@@ -1,5 +1,7 @@
 # claw-chief-of-staff
 
+> 🏆 **1st place — Civic Challenge** at [The Agent Toolkit — OpenClaw Hack Day w/ OpenAI Codex](https://luma.com/openclaw-hack-day-mar25-2026) (AWS Builder Loft, San Francisco · March 25, 2026)
+
 An AI Chief of Staff for founders, execs, and business owners. A human one costs $150-250K/year — 90% of the job is information gathering, memory, and coordination. Now you don't need one.
 
 Say "prep me for my meetings" and the agent pulls your calendar, researches each attendee across 6 sources, surfaces relevant emails and docs, and delivers a structured briefing with talking points and open action items. Say "debrief" after and it remembers everything for next time.
