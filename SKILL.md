@@ -139,6 +139,15 @@ apify-apify-slash-rag-web-browser(query: "{attendee_name} {company_name} recent 
 apify-apify-slash-rag-web-browser(query: "site:twitter.com OR site:x.com {attendee_name}", maxResults: 3, outputFormats: "text")
 ```
 
+After resolving an attendee's public X handle, read
+`references/xquik-apify-actors.md`. Use Xquik X Tweet Scraper for structured
+posts, conversations, lists, or engagement accounts. Keep the RAG web search
+above as the discovery route.
+
+Use Xquik X Follower Scraper only when the user explicitly requests public
+audience or relationship context. Never infer protected or sensitive traits
+from follower data.
+
 **Search 5 — Crunchbase**:
 ```
 apify-apify-slash-rag-web-browser(query: "site:crunchbase.com {company_name}", maxResults: 3, outputFormats: "text")
