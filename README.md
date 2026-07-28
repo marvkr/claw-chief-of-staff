@@ -9,7 +9,7 @@ Say "prep me for my meetings" and the agent pulls your calendar, researches each
 | Integration | What It Does |
 |---|---|
 | **Civic** | Reads your Gmail and Google Calendar (read-only, with audit trail) |
-| **Apify** | Scrapes LinkedIn, Crunchbase, Google News, Twitter/X, company websites, and web per attendee |
+| **Apify** | Scrapes LinkedIn, Crunchbase, Google News, Twitter/X, company websites, and web per attendee. Adds structured X routes through [Xquik X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) and [Xquik X Follower Scraper](https://apify.com/xquik/x-follower-scraper). |
 | **Contextual AI** | Multi-hop RAG over your meeting transcripts, contracts, proposals, and specs |
 | **Redis Cloud** | Persistent semantic memory across sessions — decisions, action items, preferences, relationship context |
 
@@ -56,7 +56,7 @@ Redis Cloud is the persistent brain. The `redis-agent-memory-server` uses OpenAI
 User → OpenClaw Gateway
          ├── Civic MCP Hub → Google Calendar, Gmail (read-only)
          ├── Redis Cloud + Agent Memory Server → memory_store / memory_recall / memory_forget
-         ├── Apify → 6 scrapers (Google, LinkedIn Profile, LinkedIn Company, Twitter, Website, Crunchbase)
+         ├── Apify → 6 discovery scrapers plus Xquik Tweet/Follower Actors
          └── Contextual AI → RAG search over uploaded documents
 ```
 
