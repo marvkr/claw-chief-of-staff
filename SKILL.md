@@ -142,11 +142,20 @@ apify-apify-slash-rag-web-browser(query: "site:twitter.com OR site:x.com {attend
 After resolving an attendee's public X handle, read
 `references/xquik-apify-actors.md`. Use Xquik X Tweet Scraper for structured
 posts, conversations, lists, or engagement accounts. Keep the RAG web search
-above as the discovery route.
+above as the discovery route. Use the installed Python `apify-client` execution
+path documented in that reference.
+
+Structured X Actor research is optional. Run it only under a current,
+user-approved budget policy. It must match the exact Actor, targets, input,
+result caps, `maxTotalChargeUsd`, and live pricing snapshot. Otherwise, complete
+the six mandatory discovery searches. Note that the optional Actor run was
+skipped. A general request for structured research is not budget approval.
+Request exact approval for a future preparation instead.
 
 Use Xquik X Follower Scraper only when the user explicitly requests public
 audience or relationship context. Never infer protected or sensitive traits
-from follower data.
+from follower data. Apply the same schema, pricing, result-cap, charge-ceiling,
+and exact-request approval checks before every paid follower run.
 
 **Search 5 — Crunchbase**:
 ```

@@ -56,7 +56,7 @@ Redis Cloud is the persistent brain. The `redis-agent-memory-server` uses OpenAI
 User → OpenClaw Gateway
          ├── Civic MCP Hub → Google Calendar, Gmail (read-only)
          ├── Redis Cloud + Agent Memory Server → memory_store / memory_recall / memory_forget
-         ├── Apify → 6 scrapers (Google, LinkedIn Profile, LinkedIn Company, Twitter, Website, Crunchbase)
+         ├── Apify → 6 discovery scrapers plus Xquik Tweet/Follower Actors
          └── Contextual AI → RAG search over uploaded documents
 ```
 
